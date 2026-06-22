@@ -1,6 +1,6 @@
 ---
 name: new-project-init
-description: 新しいプロジェクト/リポジトリを共通規約で立ち上げるとき。「新しいプロジェクトを作る」「リポジトリを初期化」「CLAUDE.md を用意」等で使う。フェーズ制・Conventional Commits・Issue→PR フローを定めた CLAUDE.md と基本ファイルを整える。stack 固有の雛形は scaffold-* Skill に任せる。
+description: 新しいプロジェクト/リポジトリを共通規約で立ち上げるとき。「新しいプロジェクトを作る」「リポジトリを初期化」「CLAUDE.md を用意」等で使う。フェーズ制・Conventional Commits・Issue→PR フローを定めた CLAUDE.md、常時効かせる Rules、main 保護フックなど基本ファイルを整える。stack 固有の雛形は scaffold-* Skill に任せる。
 ---
 
 # 新規プロジェクト立ち上げ
@@ -22,21 +22,33 @@ description: 新しいプロジェクト/リポジトリを共通規約で立ち
    - `LICENSE`（public 予定なら。permissive 推奨＝MIT/Apache-2.0 等）
    - `.env.example`（秘密情報は実値を入れない）
 
-4. **Git/GitHub をセットアップする**
+4. **Rules を撒く** — 同梱の [`rules/`](rules/) を対象プロジェクトの `.claude/rules/` にコピーする。
+   - `commit-conventions.md` / `license-policy.md` / `no-secrets.md` / `branching.md`。
+   - Rules は「**常に守る制約**」。CLAUDE.md（概要・手順）とは役割が別。詳細な制約は Rules を正とし、CLAUDE.template 側では重複させない。
+   - 特定パスにだけ効かせたい制約は、frontmatter に `paths:` を足してスコープする（トークン節約）。
+
+5. **main 保護フックを撒く** — 同梱の [`hooks/block-main-push.sh`](hooks/) を `.claude/hooks/` に置き（`chmod +x`）、[`hooks/settings.snippet.json`](hooks/) を `.claude/settings.json` の `hooks.PreToolUse` にマージする。
+   - 「main 直 push 禁止」のような**ハードガードは指示文ではなくフックで担保**する（モデルの判断に委ねない）。
+   - 最終的な保証は GitHub のブランチ保護。フックは早期に止める二重防御。
+
+6. **Git/GitHub をセットアップする**
    - `git init` → 初期コミット。デフォルトブランチは `main`。
    - リモートを作る場合は希望の可視性で（迷うなら **private 始まり**を推奨。公開は準備が整ってから）。
-   - main 直 push を避ける運用にする（保護設定はリポジトリ管理者が後で有効化）。
+   - リポジトリ管理者がブランチ保護を有効化する。
 
-5. **最初の作業から運用フローに乗せる** — 以降の変更は Issue → ブランチ → PR。
+7. **最初の作業から運用フローに乗せる** — 以降の変更は Issue → ブランチ → PR。
    品質チェックは `pre-pr-checks`、PR 作成は `create-pr` Skill を使う。
 
-## 規約（テンプレに含まれる中身）
+## 操縦手段の使い分け
 
-- **フェーズ制**: PROTOTYPE → ALPHA/BETA → PREVIEW → STABLE。
-- **Conventional Commits**: `feat`/`fix`/`docs`/`refactor`/`test`/`chore`/`perf`。
-- **開発フロー**: Issue → `issue-<番号>/<説明>` ブランチ → PR（`Closes #N`）→ squash merge → ブランチ削除。**main 直 push 禁止**。
-- **ライセンス**: GPL 系の依存は避け、permissive を使う。
-- **環境**: sudo 不使用、ツールは mise、ミドルウェアは Docker。
+この Skill が撒くものは、Claude Code の操縦手段ごとに役割が分かれている（[参考](../../README.md#参考--references)）。
+
+- **CLAUDE.md**（`CLAUDE.template.md`）= プロジェクト概要・構成・手順。常時ロード。
+- **Rules**（`rules/`）= 常に守る制約（Conventional Commits / ライセンス / 秘密情報 / ブランチ運用）。必要時ロード、`paths:` でスコープ可。
+- **Hook**（`hooks/`）= 確実に止めたいハードガード（main 直 push ブロック）。モデルの判断を介さない。
+- **Skill**（`pre-pr-checks` / `create-pr` / `scaffold-*`）= 呼び出して使う手順。
+
+補足: フェーズ制（PROTOTYPE→STABLE）、環境ルール（sudo 不使用・mise・Docker）は CLAUDE.template に含む。
 
 ## ルール・コツ
 

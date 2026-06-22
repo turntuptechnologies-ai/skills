@@ -38,38 +38,22 @@
 
 ## コミットメッセージ規約
 
-[Conventional Commits](https://www.conventionalcommits.org/) に従う。
-
-```
-<type>: <description> (#<issue-number>)
-```
-
-| type | 用途 |
-|------|------|
-| `feat` | 新機能 |
-| `fix` | バグ修正 |
-| `docs` | ドキュメントのみ |
-| `test` | テスト |
-| `refactor` | リファクタリング（機能変更なし） |
-| `chore` | ビルド・CI・依存等の雑務 |
-| `perf` | パフォーマンス改善 |
-
-- description は {{ 言語 }} で記述する。Issue 番号があれば末尾に `(#番号)`。
-- squash merge 時の PR タイトルもこの規約に従う。
+[Conventional Commits](https://www.conventionalcommits.org/) に従う（`<type>: <description> (#<issue-number>)`）。
+詳細は常時効く制約として `.claude/rules/commit-conventions.md` を正とする。description は {{ 言語 }} で記述する。
 
 ## 開発フロー
 
 1. **Issue 作成** — コード/ドキュメント変更には必ず Issue を作る。判断の経緯を Issue に記録する。
 2. **ブランチ作成** — `issue-<番号>/<簡単な説明>`（例: `issue-42/add-user-auth`）。
-3. **実装** — 作業中は適宜 commit・push。**main への直接 push は禁止**。
+3. **実装** — 作業中は適宜 commit・push。**main への直接 push は禁止**（`.claude/rules/branching.md` ＋ `block-main-push.sh` フックで担保）。
 4. **PR 作成** — Issue を参照（`Closes #42`）。
 5. **コードレビュー** — マージ前にレビュー（セキュリティ観点を含む）。
 6. **squash merge → ブランチ削除**。
 
 ## ライセンスルール
 
-- GPL 系ライセンスの依存は使用禁止（商用転用の可能性）。
-- 許可: MIT / Apache-2.0 / BSD / ISC 等の permissive ライセンス。依存追加時にライセンスを確認する。
+permissive ライセンス（MIT / Apache-2.0 / BSD / ISC 等）のみを使い、GPL 系の依存は避ける。
+詳細は常時効く制約として `.claude/rules/license-policy.md` を正とする。
 
 ## 環境ルール
 
