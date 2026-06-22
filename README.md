@@ -42,3 +42,21 @@ ln -s "$(pwd)/skills/<skill-name>" ~/.claude/skills/<skill-name>
 - **1 Skill = 1 ディレクトリ**、`SKILL.md` 必須。
 - **`description` が命** — 「いつ使うか・何をするか」を具体的に書く。これで発動可否が決まる。
 - main 直 push 禁止。Issue → ブランチ → PR → merge。
+
+## Skill と他の操縦手段
+
+Skill は Claude Code を操縦する手段の一つで、「**呼び出して使う手順（procedure）**」に向く。常時効かせたい制約や確実に止めたいガードは、別の手段に分けるのが筋（下記記事の整理）。
+
+| 手段 | 役割 | 置き場 |
+|---|---|---|
+| **Skill** | 呼び出して使う手順 | `.claude/skills/` |
+| **CLAUDE.md** | プロジェクト概要・構成・規約 | リポジトリ各所 |
+| **Rules** | 常に守る制約（パスでスコープ可） | `.claude/rules/` |
+| **Hook** | モデルの判断を介さない確実な自動化・ブロック | `.claude/settings.json` |
+| **Subagent** | 別コンテキストで実行し結果だけ返す | `.claude/agents/` |
+
+`new-project-init` Skill は、新規プロジェクトに CLAUDE.md・Rules・main 保護フックのテンプレをまとめて撒く。
+
+## 参考 / References
+
+- [Steering Claude Code: skills, hooks, rules, subagents, and more](https://claude.com/ja/blog/steering-claude-code-skills-hooks-rules-subagents-and-more) — 各操縦手段の役割とロード方式・使い分け。本リポジトリの設計方針の土台。
