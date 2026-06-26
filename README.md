@@ -57,6 +57,9 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 | 品質ゲート | `doc-sync` | ドキュメントの実装乖離を点検・修正 |
 | 提出 | `create-pr` | Conventional Commits タイトルで PR 作成 |
 | ドキュメント | `write-readme` | README を実証済み構成で整備 |
+| 調査 | `literature-review` | 論文・先行研究を引用付きでレビュー（arXiv/Semantic Scholar 等） |
+| 調査 | `market-research` | 市場規模・競合・トレンドを出典付きで構造化 |
+| 調査 | `library-eval` | 候補ライブラリを保守・採用・ライセンス・脆弱性で比較 |
 
 ## 新しい Skill を追加する
 
