@@ -40,6 +40,24 @@ install 後、スキルは**名前空間付き**で呼び出す（他スキル�
 
 > プラグイン化により名前空間（`turntup:`）が付くため、generic なスキル名でも組み込み/他プラグインと衝突しない。`plugin.json` / `marketplace.json` を足してもリポジトリは private のまま。Anthropic のコミュニティ marketplace への**明示的な申請をしない限り公開されない**。
 
+## スキル一覧 / Catalog
+
+install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を見て自動で使うこともある）。
+
+| 分類 | Skill | 用途 |
+|---|---|---|
+| 進行 | `run-agent-team` | Issue を Agent Teams で進める（architect→reviewer→developer→tester→documenter） |
+| 立ち上げ | `new-project-init` | 共通規約で新規プロジェクト立ち上げ（CLAUDE.md / Rules / main 保護フック） |
+| scaffold | `scaffold-wxt-extension` | WXT + React + Tailwind のブラウザ拡張 |
+| scaffold | `scaffold-react-app` | Vite + React + Tailwind の SPA |
+| scaffold | `scaffold-python-tool` | uv + ruff + mypy + pytest の Python ツール |
+| scaffold | `scaffold-cf-worker` | Cloudflare Workers（wrangler + Hono） |
+| scaffold | `scaffold-deno-api` | Deno + Hono + Drizzle の API サーバー |
+| 品質ゲート | `pre-pr-checks` | stack 判定で format/lint/typecheck/test を一括実行 |
+| 品質ゲート | `doc-sync` | ドキュメントの実装乖離を点検・修正 |
+| 提出 | `create-pr` | Conventional Commits タイトルで PR 作成 |
+| ドキュメント | `write-readme` | README を実証済み構成で整備 |
+
 ## 新しい Skill を追加する
 
 1. `skills/<skill-name>/SKILL.md` を作る（雛形は [`templates/SKILL.md`](templates/SKILL.md)）
@@ -66,6 +84,8 @@ Skill は Claude Code を操縦する手段の一つで、「**呼び出して�
 | **Subagent** | 別コンテキストで実行し結果だけ返す | `.claude/agents/` |
 
 `new-project-init` Skill は、新規プロジェクトに CLAUDE.md・Rules・main 保護フックのテンプレをまとめて撒く。
+
+> 表の `.claude/skills/` は standalone 配置の一般的な場所。**このリポジトリ自体は `turntup` プラグインとして配布**し、各 Skill は `skills/` 配下に置く。利用側は install 後 `/turntup:<skill>` で呼び出す（→ [使い方](#使い方各メンバー)）。
 
 ## 参考 / References
 
