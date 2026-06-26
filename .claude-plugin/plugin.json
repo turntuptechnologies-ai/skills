@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "turntup",
+  "description": "Turnt Up Technologies 共有 Claude Code Skill 集（立ち上げ・scaffold・品質ゲート・PR・ドキュメント・Agent Teams）",
+  "version": "0.1.0",
+  "author": {
+    "name": "Turnt Up Technologies"
+  },
+  "license": "MIT"
+}

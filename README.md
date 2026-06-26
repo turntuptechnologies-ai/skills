@@ -16,19 +16,29 @@ skills/<skill-name>/
 
 ## 使い方（各メンバー）
 
-このリポジトリを clone し、使いたい Skill を自分の Claude 環境から見えるようにする。
+このリポジトリは Claude Code の**プラグイン**（`turntup`）として配布する。**private リポのまま**、各自の GitHub 権限で install できる（公開はされない）。
 
 ```bash
-git clone https://github.com/turntuptechnologies-ai/skills.git
-cd skills
+# マーケットプレイスを登録（一度だけ。アクセスは gh の権限で gate される）
+/plugin marketplace add turntuptechnologies-ai/skills
 
-# 例: 個人環境(~/.claude/skills)へシンボリックリンク
-ln -s "$(pwd)/skills/<skill-name>" ~/.claude/skills/<skill-name>
+# プラグインを install
+/plugin install turntup@turntup-skills
 
-# またはプロジェクト単位で使うなら .claude/skills/ にリンク/コピー
+# 更新（リポに変更が入ったら）
+/plugin marketplace update turntup-skills
 ```
 
-`description` を見て Claude が自動的に使うか判断する。明示的に呼びたいときは `/<skill-name>`。
+install 後、スキルは**名前空間付き**で呼び出す（他スキルと衝突しない）:
+
+```
+/turntup:create-pr
+/turntup:pre-pr-checks
+```
+
+`description` を見て Claude が自動的に使うかどうかも判断する。
+
+> プラグイン化により名前空間（`turntup:`）が付くため、generic なスキル名でも組み込み/他プラグインと衝突しない。`plugin.json` / `marketplace.json` を足してもリポジトリは private のまま。Anthropic のコミュニティ marketplace への**明示的な申請をしない限り公開されない**。
 
 ## 新しい Skill を追加する
 

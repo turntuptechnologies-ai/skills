@@ -1,0 +1,14 @@
+{
+  "name": "turntup-skills",
+  "owner": {
+    "name": "Turnt Up Technologies"
+  },
+  "description": "Turnt Up Technologies 社内共有 Claude Code プラグインのマーケットプレイス（private）",
+  "plugins": [
+    {
+      "name": "turntup",
+      "source": "./",
+      "description": "共有 Skill 集（new-project-init / scaffold-* / pre-pr-checks / doc-sync / create-pr / write-readme / run-agent-team 等）"
+    }
+  ]
+}
