@@ -76,3 +76,13 @@ Vite ベースの React 19 + TypeScript SPA を雛形生成する。
 ## 補足
 
 - ライセンスは permissive 前提。依存追加時にライセンスを確認する。
+
+## 完了条件
+
+以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
+
+- [ ] `pnpm install` が通り、`pnpm dev` でアプリが起動する
+- [ ] scripts（dev/build/preview/test/test:run/lint/format/check）が揃っている
+- [ ] Tailwind v4 / Vitest(jsdom + setup) / Biome が設定済み
+- [ ] API 連携がある場合 TanStack Query を使っている
+- [ ] `VITE_*` 以外の秘密情報をフロントに埋め込んでいない

@@ -74,3 +74,13 @@ description: ブラウザ拡張機能を新規に作るとき。「拡張機能�
 ## 補足
 
 - 機密値（API キー等）はコードに埋め込まない。設定 UI かビルド時の環境変数で扱う。
+
+## 完了条件
+
+以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
+
+- [ ] `pnpm install` が通り、`pnpm dev` で拡張が起動する
+- [ ] scripts（dev/build/zip/compile/test/postinstall）が揃っている
+- [ ] Tailwind v4 が vite plugin + エントリ CSS で有効になっている
+- [ ] manifest の permissions / host_permissions が必要最小限（`<all_urls>` を使っていない）
+- [ ] 機密値をコードに埋め込んでいない

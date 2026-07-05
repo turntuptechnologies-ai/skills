@@ -65,3 +65,13 @@ src レイアウトの Python プロジェクトを雛形生成する。
 ## 補足
 
 - ライセンスは permissive（MIT 等）前提。GPL 系依存は避ける。
+
+## 完了条件
+
+以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
+
+- [ ] src レイアウト（`src/<pkg>/`, `tests/`）で `uv sync` が通る
+- [ ] pyproject に ruff / mypy(strict) / pytest の設定が入っている
+- [ ] `uv run ruff format . && uv run ruff check . && uv run mypy src/ && uv run pytest` が通る
+- [ ] CLI がある場合 `[project.scripts]` が定義されている
+- [ ] `.env` はコミット対象外、`.env.example` のみ（実値なし）

@@ -79,3 +79,13 @@ Cloudflare Workers 上のアプリ/API を雛形生成する。
 ## 補足
 
 - ライセンスは permissive 前提。social/固有情報は埋め込まない。
+
+## 完了条件
+
+以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
+
+- [ ] `pnpm install` が通り、`pnpm dev`（wrangler dev）で起動する
+- [ ] scripts（dev/deploy/test/types/typecheck/lint/format）が揃っている
+- [ ] wrangler.jsonc に compatibility_date（作成時点の日付）/ nodejs_compat / observability がある
+- [ ] バインディング追加後に `pnpm types` を実行し型を更新した
+- [ ] 機密を vars に書いていない（wrangler secret を案内）/ database_id 等の実値をコミットしていない
