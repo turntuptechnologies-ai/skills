@@ -59,3 +59,13 @@ description: 新しいプロジェクト/リポジトリを共通規約で立ち
 ## 補足
 
 - この Skill 自体は汎用。特定の組織・社内リポジトリに依存しない。
+
+## 完了条件
+
+以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
+
+- [ ] CLAUDE.md にプレースホルダ（`{{ }}`）が残っていない
+- [ ] `.claude/rules/` に 4 ルール（commit-conventions/license-policy/no-secrets/branching）を配置した
+- [ ] `block-main-push.sh` を `.claude/hooks/` に配置し **chmod +x** し、settings.json に PreToolUse を配線した
+- [ ] `git init` + 初期コミット済み、デフォルトブランチが `main`
+- [ ] `.env.example` に実値が入っていない / LICENSE 方針を確認した

@@ -100,3 +100,13 @@ Deno ランタイム上に、型付きの REST/JSON API サーバーを雛形生
 
 - 命名は runtime（Deno）で識別。Cloudflare Workers なら `scaffold-cf-worker` を使う。
 - ライセンスは permissive 前提。固有情報は埋め込まない。
+
+## 完了条件
+
+以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
+
+- [ ] deno.json の tasks / imports が揃い、`deno task check` と `deno task lint` が通る
+- [ ] compilerOptions が strict + noUncheckedIndexedAccess、lock frozen
+- [ ] tasks の permissions が最小限で明示されている（広い権限を使っていない）
+- [ ] drizzle.config.ts が DATABASE_URL（環境変数）を参照し、実値をコミットしていない
+- [ ] テストが `_test.ts` / `_integration_test.ts` 規約で task 分離されている
