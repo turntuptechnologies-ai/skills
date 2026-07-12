@@ -48,6 +48,7 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 |---|---|---|
 | 進行 | `run-agent-team` | Issue を Agent Teams で進める（architect→reviewer→developer→tester→documenter） |
 | 進行 | `handoff` | セッションの作業状態を引き継ぎ書に保存・復元（`/clear`・`/compact` 後は同梱 hook が自動注入） |
+| 進行 | `create-issue` | 背景/提案/受け入れ条件の定型で Issue を起票（Issue → PR フローの入口） |
 | 立ち上げ | `new-project-init` | 共通規約で新規プロジェクト立ち上げ（CLAUDE.md / Rules / main 保護フック） |
 | scaffold | `scaffold-wxt-extension` | WXT + React + Tailwind のブラウザ拡張 |
 | scaffold | `scaffold-react-app` | Vite + React + Tailwind の SPA |
