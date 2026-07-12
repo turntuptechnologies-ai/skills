@@ -63,6 +63,7 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 | 提出 | `pr-babysit` | PR の CI を監視し、失敗を修正して green になるまで面倒を見る |
 | ドキュメント | `write-readme` | README を実証済み構成で整備 |
 | 保守 | `dependency-update` | changelog・breaking 確認つきで依存を安全に更新（選定は `library-eval`） |
+| 保守 | `release` | semver 判定・CHANGELOG・タグ・GitHub Release を一貫実行 |
 | 調査 | `literature-review` | 論文・先行研究を引用付きでレビュー（arXiv/Semantic Scholar 等） |
 | 調査 | `market-research` | 市場規模・競合・トレンドを出典付きで構造化 |
 | 調査 | `library-eval` | 候補ライブラリを保守・採用・ライセンス・脆弱性で比較 |
