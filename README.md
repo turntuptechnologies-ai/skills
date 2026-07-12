@@ -59,6 +59,7 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 | 品質ゲート | `doc-sync` | ドキュメントの実装乖離を点検・修正 |
 | 品質ゲート | `skill-lint` | SKILL.md をテンプレ・運用ルールのチェックリストで点検（Skill 追加 PR の前に） |
 | 提出 | `create-pr` | Conventional Commits タイトルで PR 作成 |
+| 提出 | `pr-babysit` | PR の CI を監視し、失敗を修正して green になるまで面倒を見る |
 | ドキュメント | `write-readme` | README を実証済み構成で整備 |
 | 調査 | `literature-review` | 論文・先行研究を引用付きでレビュー（arXiv/Semantic Scholar 等） |
 | 調査 | `market-research` | 市場規模・競合・トレンドを出典付きで構造化 |
