@@ -57,6 +57,7 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 | scaffold | `scaffold-deno-api` | Deno + Hono + Drizzle の API サーバー |
 | 品質ゲート | `pre-pr-checks` | stack 判定で format/lint/typecheck/test を一括実行 |
 | 品質ゲート | `doc-sync` | ドキュメントの実装乖離を点検・修正 |
+| 品質ゲート | `skill-lint` | SKILL.md をテンプレ・運用ルールのチェックリストで点検（Skill 追加 PR の前に） |
 | 提出 | `create-pr` | Conventional Commits タイトルで PR 作成 |
 | ドキュメント | `write-readme` | README を実証済み構成で整備 |
 | 調査 | `literature-review` | 論文・先行研究を引用付きでレビュー（arXiv/Semantic Scholar 等） |
