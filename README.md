@@ -46,7 +46,7 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 
 | 分類 | Skill | 用途 |
 |---|---|---|
-| 進行 | `run-agent-team` | Issue を Agent Teams で進める（architect→reviewer→developer→tester→documenter） |
+| 進行 | `run-agent-team` | Issue を Agent Teams で進める（architect→reviewer→developer→tester→documenter）。TeamCreate 不可時は Subagents で代替 |
 | 進行 | `handoff` | セッションの作業状態を引き継ぎ書に保存・復元（`/clear`・`/compact` 後は同梱 hook が自動注入） |
 | 進行 | `create-issue` | 背景/提案/受け入れ条件の定型で Issue を起票（Issue → PR フローの入口） |
 | 進行 | `debug-root-cause` | 再現→切り分け→根本原因→回帰テストの順でバグを修正（対症療法で終わらせない） |
