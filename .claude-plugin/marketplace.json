@@ -1,9 +1,9 @@
 {
   "name": "turntup-skills",
   "owner": {
-    "name": "Turnt Up Technologies"
+    "name": "Turnt Up Technologies株式会社"
   },
-  "description": "Turnt Up Technologies の Claude Code プラグインマーケットプレイス",
+  "description": "Turnt Up Technologies株式会社の Claude Code プラグインマーケットプレイス",
   "plugins": [
     {
       "name": "turntup",
