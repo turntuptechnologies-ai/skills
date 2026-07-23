@@ -1,6 +1,6 @@
 # skills
 
-[Claude Code](https://claude.com/claude-code) の **Skill** 集。`turntup` プラグインとして install すると、Issue 起票 → 実装 → 品質ゲート → PR → リリースまでの開発フローを Skill として呼び出せる。
+Turnt Up Technologies株式会社の [Claude Code](https://claude.com/claude-code) **Skill** 集。`turntup` プラグインとして install すると、Issue 起票 → 実装 → 品質ゲート → PR → リリースまでの開発フローを Skill として呼び出せる。
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
