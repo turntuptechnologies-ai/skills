@@ -2,6 +2,8 @@
 
 Turnt Up Technologies株式会社の [Claude Code](https://claude.com/claude-code) **Skill** 集。`turntup` プラグインとして install すると、Issue 起票 → 実装 → 品質ゲート → PR → リリースまでの開発フローを Skill として呼び出せる。
 
+[![Claude Code](https://img.shields.io/badge/Claude_Code-plugin-d97757)](https://claude.com/claude-code)
+[![Skills](https://img.shields.io/github/directory-file-count/turntuptechnologies-ai/skills/skills?type=dir&label=skills)](#スキル一覧--catalog)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 各 Skill は特定の組織・環境に依存する情報を含めず、どのプロジェクトでも汎用に動くように書いている（→ [運用ルール](#運用ルール)）。
