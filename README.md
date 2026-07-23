@@ -1,8 +1,10 @@
 # skills
 
-社内で共有して使う [Claude Code](https://claude.com/claude-code) の **Skill** 置き場。
+[Claude Code](https://claude.com/claude-code) の **Skill** 集。`turntup` プラグインとして install すると、Issue 起票 → 実装 → 品質ゲート → PR → リリースまでの開発フローを Skill として呼び出せる。
 
-将来的に社外 OSS 公開も視野に入れているため、各 Skill は **社内固有情報を一切含めず、汎用的に動く**ように書く（→ [運用ルール](#運用ルール)）。
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+各 Skill は特定の組織・環境に依存する情報を含めず、どのプロジェクトでも汎用に動くように書いている（→ [運用ルール](#運用ルール)）。
 
 ## Skill とは
 
@@ -14,31 +16,29 @@ skills/<skill-name>/
   └── (任意) 補助スクリプト・参考資料
 ```
 
-## 使い方（各メンバー）
+## インストール
 
-このリポジトリは Claude Code の**プラグイン**（`turntup`）として配布する。**private リポのまま**、各自の GitHub 権限で install できる（公開はされない）。
+前提: [Claude Code](https://claude.com/claude-code) がインストール済みであること。Claude Code 内で以下を実行する。
 
 ```bash
-# マーケットプレイスを登録（一度だけ。アクセスは gh の権限で gate される）
+# マーケットプレイスを登録（一度だけ）
 /plugin marketplace add turntuptechnologies-ai/skills
 
 # プラグインを install
 /plugin install turntup@turntup-skills
 
-# 更新（リポに変更が入ったら）
+# 更新（リポジトリに変更が入ったら）
 /plugin marketplace update turntup-skills
 ```
 
-install 後、スキルは**名前空間付き**で呼び出す（他スキルと衝突しない）:
+install 後、スキルは**名前空間付き**で呼び出す（組み込み・他プラグインの Skill と衝突しない）:
 
 ```
 /turntup:create-pr
 /turntup:pre-pr-checks
 ```
 
-`description` を見て Claude が自動的に使うかどうかも判断する。
-
-> プラグイン化により名前空間（`turntup:`）が付くため、generic なスキル名でも組み込み/他プラグインと衝突しない。`plugin.json` / `marketplace.json` を足してもリポジトリは private のまま。Anthropic のコミュニティ marketplace への**明示的な申請をしない限り公開されない**。
+明示的に呼び出さなくても、Claude が各 Skill の `description` を見て自動的に使うかどうかを判断する。
 
 ## スキル一覧 / Catalog
 
@@ -69,15 +69,24 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 | 調査 | `market-research` | 市場規模・競合・トレンドを出典付きで構造化 |
 | 調査 | `library-eval` | 候補ライブラリを保守・採用・ライセンス・脆弱性で比較 |
 
+## リポジトリ構成 / Layout
+
+```
+skills/           各 Skill（1 Skill = 1 ディレクトリ、SKILL.md 必須）
+hooks/            プラグイン同梱 hook（hooks.json + スクリプト）
+templates/        新規 Skill の雛形（SKILL.md）
+.claude-plugin/   プラグイン定義（plugin.json / marketplace.json）
+```
+
 ## 新しい Skill を追加する
 
 1. `skills/<skill-name>/SKILL.md` を作る（雛形は [`templates/SKILL.md`](templates/SKILL.md)）
 2. ローカルで試して `description` と手順を調整
-3. ブランチを切って PR（→ [運用ルール](#運用ルール)）
+3. `/turntup:skill-lint` で点検し、ブランチを切って PR（→ [運用ルール](#運用ルール)）
 
 ## 運用ルール
 
-- **社内固有情報を書かない** — 社名・組織名・内部 URL・認証情報・固有プロジェクト名を Skill 本文に埋め込まない。環境差は環境変数や引数で渡す。公開時に履歴を漁られても問題ない状態を最初から保つ。
+- **固有情報を書かない** — 組織名・内部 URL・認証情報・固有プロジェクト名を Skill 本文に埋め込まない。環境差は環境変数や引数で渡し、どの環境でも汎用に動く状態を保つ。
 - **1 Skill = 1 ディレクトリ**、`SKILL.md` 必須。
 - **`description` が命** — 「いつ使うか・何をするか」を具体的に書く。これで発動可否が決まる。
 - main 直 push 禁止。Issue → ブランチ → PR → merge。
@@ -105,8 +114,12 @@ Skill は Claude Code を操縦する手段の一つで、「**呼び出して�
 | `load-handoff.sh` | SessionStart（`clear` / `compact` 後） | プロジェクトに `.claude/handoff/latest.md` があればコンテキストに自動注入（無ければ何もしない） |
 | `compact-preserve.sh` | PreCompact | 要約に残すべき項目（ゴール・進捗・重要ファイル・決定事項・次の一手）のガイダンスを注入 |
 
-> 表の `.claude/skills/` は standalone 配置の一般的な場所。**このリポジトリ自体は `turntup` プラグインとして配布**し、各 Skill は `skills/` 配下に置く。利用側は install 後 `/turntup:<skill>` で呼び出す（→ [使い方](#使い方各メンバー)）。
+> 表の `.claude/skills/` は standalone 配置の一般的な場所。**このリポジトリ自体は `turntup` プラグインとして配布**し、各 Skill は `skills/` 配下に置く。利用側は install 後 `/turntup:<skill>` で呼び出す（→ [インストール](#インストール)）。
 
 ## 参考 / References
 
 - [Steering Claude Code: skills, hooks, rules, subagents, and more](https://claude.com/ja/blog/steering-claude-code-skills-hooks-rules-subagents-and-more) — 各操縦手段の役割とロード方式・使い分け。本リポジトリの設計方針の土台。
+
+## ライセンス / License
+
+[MIT](LICENSE)
