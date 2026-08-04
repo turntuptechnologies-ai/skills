@@ -15,7 +15,7 @@ GitHub リポジトリを公開するときに必要なセキュリティ設定�
 2. **private → public 切替の場合のみ**: 公開する**前に**、git 履歴を含めて秘密情報（API キー・トークン・内部 URL・個人情報）が無いか確認する。gitleaks 等のツールが使えれば使い、無ければ `git log -p` への代表的パターン（`api[_-]?key` / `token` / `secret` / `password` / `BEGIN .* PRIVATE KEY` 等）の grep と設定ファイルの目視で確認する。検出したら公開を中止し、該当秘密情報のローテーション（無効化・再発行）を先に行う（履歴の書き換えだけでは対策にならない）。
 3. チェックリスト（下表）の全項目を確認欄の方法（コマンドまたはファイル有無の確認）で点検し、出力フォーマットの表で報告する。
 4. 不足項目の適用可否をユーザーに確認し、了承された項目だけを適用コマンドで設定する。
-5. 適用後、確認コマンドを再実行して反映を検証する。secret scanning を有効化した場合は、既存履歴の走査結果（open なアラートの件数）も確認する: `gh api --paginate --slurp "repos/{owner}/{repo}/secret-scanning/alerts?state=open" --jq 'map(length) | add'`
+5. 適用後、確認コマンドを再実行して反映を検証する。secret scanning を有効化した場合は、既存履歴の走査結果（open なアラートの件数）も確認する: `gh api --paginate "repos/{owner}/{repo}/secret-scanning/alerts?state=open&per_page=100" --jq '.[].number' | wc -l`
 
 ## チェックリスト
 
