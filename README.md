@@ -53,6 +53,7 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 | 進行 | `create-issue` | 背景/提案/受け入れ条件の定型で Issue を起票（Issue → PR フローの入口） |
 | 進行 | `debug-root-cause` | 再現→切り分け→根本原因→回帰テストの順でバグを修正（対症療法で終わらせない） |
 | 立ち上げ | `new-project-init` | 共通規約で新規プロジェクト立ち上げ（CLAUDE.md / Rules / main 保護フック） |
+| 立ち上げ | `repo-publish-security` | リポジトリ公開時のセキュリティ設定を点検・適用（secret scanning / 保護 ruleset / Actions 権限、公開前の履歴秘密情報チェック） |
 | scaffold | `scaffold-wxt-extension` | WXT + React + Tailwind のブラウザ拡張 |
 | scaffold | `scaffold-react-app` | Vite + React + Tailwind の SPA |
 | scaffold | `scaffold-python-tool` | uv + ruff + mypy + pytest の Python ツール |
