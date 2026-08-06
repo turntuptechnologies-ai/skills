@@ -96,6 +96,7 @@ scripts/          Skill 構造の機械検査（lint-skills.py。CI と手元で
 - **`description` が命** — 「いつ使うか・何をするか」を具体的に書く。これで発動可否が決まる。
 - main 直 push 禁止。Issue → ブランチ → PR → merge。
 - **マージ = 配布ではない** — プラグインの配布は `plugin.json` の version 単位。Skill の変更は `release`（version bump・タグ・GitHub Release）を経て、利用側の `/plugin marketplace update` で初めて届く。
+- **機械で判定できるものをモデルで再判定しない** — 構造検査は `scripts/lint-skills.py`（CI と手元）の結果を採用し、モデルの点検は判断が要る項目に絞る。独立検証のサブエージェントは既定 1 体にまとめる（候補ごとの個別起動は、リリース直前の最終ゲートや候補同士の相互影響を避けたいときに限る）。検証の質（独立性・反証）は維持したまま、重複コストだけを削る。
 
 ## Skill と他の操縦手段
 
