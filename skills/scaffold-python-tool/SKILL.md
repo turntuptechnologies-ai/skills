@@ -62,11 +62,6 @@ src レイアウトの Python プロジェクトを雛形生成する。
 - 秘密情報は `.env`＋`python-dotenv`、コミットするのは `.env.example` のみ。
 - ランタイムは mise で固定、sudo は使わない。
 
-## 補足
-
-- ライセンスは permissive（MIT 等）前提。GPL 系依存は避ける。
-- 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。
-
 ## 完了条件
 
 以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
@@ -76,3 +71,8 @@ src レイアウトの Python プロジェクトを雛形生成する。
 - [ ] `uv run ruff format . && uv run ruff check . && uv run mypy src/ && uv run pytest` が通る
 - [ ] CLI がある場合 `[project.scripts]` が定義されている
 - [ ] `.env` はコミット対象外、`.env.example` のみ（実値なし）
+
+## 補足
+
+- ライセンスは permissive（MIT 等）前提。GPL 系依存は避ける。
+- 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。

@@ -71,17 +71,17 @@ description: ブラウザ拡張機能を新規に作るとき。「拡張機能�
 - `postinstall: wxt prepare` を入れると型生成が走り、初回 clone 後の型エラーを防げる。
 - Firefox 配布も視野なら `build:firefox` / `zip:firefox` も用意する。
 
-## 補足
-
-- 機密値（API キー等）はコードに埋め込まない。設定 UI かビルド時の環境変数で扱う。
-- 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。
-
 ## 完了条件
 
 以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
 
 - [ ] `pnpm install` が通り、`pnpm dev` で拡張が起動する
 - [ ] scripts（dev/build/zip/compile/test/postinstall）が揃っている
-- [ ] Tailwind v4 が vite plugin + エントリ CSS で有効になっている
+- [ ] Tailwind が vite plugin + エントリ CSS で有効になっている
 - [ ] manifest の permissions / host_permissions が必要最小限（`<all_urls>` を使っていない）
 - [ ] 機密値をコードに埋め込んでいない
+
+## 補足
+
+- 機密値（API キー等）はコードに埋め込まない。設定 UI かビルド時の環境変数で扱う。
+- 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。

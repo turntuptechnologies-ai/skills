@@ -73,17 +73,17 @@ Vite ベースの React 19 + TypeScript SPA を雛形生成する。
 - 環境変数は Vite の `import.meta.env.VITE_*`。秘密情報をフロントに埋め込まない（公開される）。
 - グラフが必要なら Recharts。
 
-## 補足
-
-- ライセンスは permissive 前提。依存追加時にライセンスを確認する。
-- 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。
-
 ## 完了条件
 
 以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
 
 - [ ] `pnpm install` が通り、`pnpm dev` でアプリが起動する
 - [ ] scripts（dev/build/preview/test/test:run/lint/format/check）が揃っている
-- [ ] Tailwind v4 / Vitest(jsdom + setup) / Biome が設定済み
+- [ ] Tailwind / Vitest(jsdom + setup) / Biome が設定済み
 - [ ] API 連携がある場合 TanStack Query を使っている
 - [ ] `VITE_*` 以外の秘密情報をフロントに埋め込んでいない
+
+## 補足
+
+- ライセンスは permissive 前提。依存追加時にライセンスを確認する。
+- 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。

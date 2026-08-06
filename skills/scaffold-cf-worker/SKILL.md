@@ -76,11 +76,6 @@ Cloudflare Workers 上のアプリ/API を雛形生成する。
 - バインディングを足したら `pnpm types` を再実行して型を更新する。
 - 詳細な設計判断・落とし穴は `workers-best-practices` Skill を必ず参照する。
 
-## 補足
-
-- ライセンスは permissive 前提。social/固有情報は埋め込まない。
-- 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。
-
 ## 完了条件
 
 以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
@@ -90,3 +85,8 @@ Cloudflare Workers 上のアプリ/API を雛形生成する。
 - [ ] wrangler.jsonc に compatibility_date（作成時点の日付）/ nodejs_compat / observability がある
 - [ ] バインディング追加後に `pnpm types` を実行し型を更新した
 - [ ] 機密を vars に書いていない（wrangler secret を案内）/ database_id 等の実値をコミットしていない
+
+## 補足
+
+- ライセンスは permissive 前提。social/固有情報は埋め込まない。
+- 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。
