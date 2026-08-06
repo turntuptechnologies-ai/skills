@@ -96,11 +96,6 @@ Deno ランタイム上に、型付きの REST/JSON API サーバーを雛形生
 - 機密（`DATABASE_URL` 等）は環境変数（`.env`＋`--env`）。コミットは `.env.example` のみ（→ no-secrets ルール）。
 - OpenAPI ドキュメントが要るなら `@hono/zod-openapi` でスキーマ駆動にし、`@hono/swagger-ui` で配信する。
 
-## 補足
-
-- 命名は runtime（Deno）で識別。Cloudflare Workers なら `scaffold-cf-worker` を使う。
-- ライセンスは permissive 前提。固有情報は埋め込まない。
-
 ## 完了条件
 
 以下を全て満たしたら完了。**満たせない項目があれば、黙って省略せず理由を報告する。**
@@ -110,3 +105,9 @@ Deno ランタイム上に、型付きの REST/JSON API サーバーを雛形生
 - [ ] tasks の permissions が最小限で明示されている（広い権限を使っていない）
 - [ ] drizzle.config.ts が DATABASE_URL（環境変数）を参照し、実値をコミットしていない
 - [ ] テストが `_test.ts` / `_integration_test.ts` 規約で task 分離されている
+
+## 補足
+
+- 命名は runtime（Deno）で識別。Cloudflare Workers なら `scaffold-cf-worker` を使う。
+- ライセンスは permissive 前提。固有情報は埋め込まない。
+- 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。
