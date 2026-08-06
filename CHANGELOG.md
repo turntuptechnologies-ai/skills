@@ -2,6 +2,27 @@
 
 このリポジトリの主な変更を記録する。形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョンは [Semantic Versioning](https://semver.org/lang/ja/) に従う。
 
+## [0.2.0] - 2026-08-06
+
+公開リポジトリのセキュリティ設定を点検・適用する新 Skill `repo-publish-security` を追加（Skill は 23 個に）。`handoff` はセッションを閉じて開き直した場合も自動復元されるようになり、Skill の品質は CI の機械検査と skill-lint のコマンド実行検証で二重に守られるようになった。
+
+### Added
+
+- `repo-publish-security` — リポジトリ公開時のセキュリティ設定（secret scanning / Dependabot / ブランチ保護 ruleset / Actions 権限）を gh CLI で点検し、ユーザー確認の上で適用する。private → public 切替時は公開前に git 履歴の秘密情報チェックを行う (#73, #74)
+- `skill-lint` にチェック項目 10「コマンドの実行検証」を追加。副作用のない確認系コマンドは実際に実行して確かめ、実行できない場合は未検証として理由を報告する (#77, #81)
+- Skill 構造の機械検査 `scripts/lint-skills.py` と GitHub Actions CI を追加。frontmatter・必須節・完了条件の前文・曖昧語・README カタログ同期を PR ごとに検査し、required status check として必須化 (#78, #82)
+- `handoff` の初回保存時に、`.claude/handoff/` を git 管理から除外する方法（`.gitignore` / `.git/info/exclude` / 何もしない）を確認するようにした (#72)
+
+### Changed
+
+- `handoff` の SessionStart hook が新しいセッションの開始時（`startup`）にも発動し、セッションを閉じて開き直した場合（日またぎ等）も引き継ぎ書が自動復元されるようになった。`--resume`・`--continue` での会話再開は対象外 (#79, #83)
+- `handoff` の保存提案トリガーを見直し、`run-agent-team` の Subagents フォールバックにロール別の reasoning effort 指針を追加 (#70)
+- Skill 間の整合性を改善 — `new-project-init` から `repo-publish-security` への導線、調査系 Skill の `deep-research` 非対応環境向けフォールバック、scaffold 系への「記載バージョンは作成時点の目安」注記、全 Skill の節順統一（完了条件 → 補足） (#80, #84)
+
+### Fixed
+
+- `repo-publish-security` の secret scanning アラート件数コマンドが gh の仕様（`--slurp` と `--jq` の併用不可）で実行できなかった問題を修正 (#75, #76)
+
 ## [0.1.0] - 2026-07-26
 
 初回リリース。`turntup` プラグインを install すると、Issue 起票 → 実装 → 品質ゲート → PR → リリースまでの開発フローを 22 個の Skill として呼び出せる。
@@ -60,4 +81,5 @@
 - 各 Skill に、満たせない項目があれば理由を報告させる完了条件チェックリストを追加 (#40)
 - 各 Skill に出力フォーマットの明示と良い例 / 悪い例を追加 (#42)
 
+[0.2.0]: https://github.com/turntuptechnologies-ai/skills/releases/tag/v0.2.0
 [0.1.0]: https://github.com/turntuptechnologies-ai/skills/releases/tag/v0.1.0
