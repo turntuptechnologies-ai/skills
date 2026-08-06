@@ -78,6 +78,8 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 skills/           各 Skill（1 Skill = 1 ディレクトリ、SKILL.md 必須）
 hooks/            プラグイン同梱 hook（hooks.json + スクリプト）
 templates/        新規 Skill の雛形（SKILL.md）
+scripts/          Skill 構造の機械検査（lint-skills.py。CI と手元で実行）
+.github/          CI（workflows/ci.yml が scripts/lint-skills.py を実行）
 .claude-plugin/   プラグイン定義（plugin.json / marketplace.json）
 ```
 
@@ -85,7 +87,7 @@ templates/        新規 Skill の雛形（SKILL.md）
 
 1. `skills/<skill-name>/SKILL.md` を作る（雛形は [`templates/SKILL.md`](templates/SKILL.md)）
 2. ローカルで試して `description` と手順を調整
-3. `/turntup:skill-lint` で点検し、ブランチを切って PR（→ [運用ルール](#運用ルール)）
+3. `/turntup:skill-lint` で点検し、ブランチを切って PR（→ [運用ルール](#運用ルール)）。PR では CI が `scripts/lint-skills.py` で構造の機械検査を行う
 
 ## 運用ルール
 
