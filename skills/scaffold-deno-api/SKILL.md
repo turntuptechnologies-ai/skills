@@ -100,6 +100,7 @@ Deno ランタイム上に、型付きの REST/JSON API サーバーを雛形生
 
 - 命名は runtime（Deno）で識別。Cloudflare Workers なら `scaffold-cf-worker` を使う。
 - ライセンスは permissive 前提。固有情報は埋め込まない。
+- 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。
 
 ## 完了条件
 

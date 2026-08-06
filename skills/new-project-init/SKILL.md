@@ -34,7 +34,7 @@ description: 新しいプロジェクト/リポジトリを共通規約で立ち
 6. **Git/GitHub をセットアップする**
    - `git init` → 初期コミット。デフォルトブランチは `main`。
    - リモートを作る場合は希望の可視性で（迷うなら **private 始まり**を推奨。公開は準備が整ってから）。
-   - リポジトリ管理者がブランチ保護を有効化する。
+   - リポジトリ管理者がブランチ保護を有効化する。public で公開する（または後から公開に切り替える）際は、`repo-publish-security` Skill で公開時のセキュリティ設定（secret scanning・ブランチ保護 ruleset・Actions 権限等）を点検・適用する。
 
 7. **最初の作業から運用フローに乗せる** — 以降の変更は Issue → ブランチ → PR。
    品質チェックは `pre-pr-checks`、PR 作成は `create-pr` Skill を使う。
