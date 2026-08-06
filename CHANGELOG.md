@@ -2,6 +2,17 @@
 
 このリポジトリの主な変更を記録する。形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョンは [Semantic Versioning](https://semver.org/lang/ja/) に従う。
 
+## [0.3.0] - 2026-08-06
+
+検証ワークフローを、品質（独立性・反証・検査範囲）は維持したままトークン消費を抑える既定に変更した。上位モデルでの使用量制限に到達しにくくなる。
+
+### Changed
+
+- `adversarial-verify` — 独立検証の既定を「1 体のサブエージェントに全候補をまとめて渡す」に変更（独立性の要件は「指摘を出した側と別コンテキスト」であり 1 体でも満たせる）。候補ごとの個別起動は、リリース直前の最終ゲートや候補間の相互影響を避けたいときに限定 (#88, #89)
+- `skill-lint` — 機械検査（`scripts/lint-skills.py` 等）を先に実行し、機械判定できる項目はその結果を採用してモデルで再判定しない。機械検査由来の ❌ は決定的な検査結果のため敵対的検証の対象外 (#88, #89)
+- `run-agent-team` — 使用量・コストの制約が強いときの縮小編成を補足に明記（解散前チェックは省略しない） (#88, #89)
+- README の運用ルールに「機械で判定できるものをモデルで再判定しない」(#88, #89) と「マージ = 配布ではない」(#86, #87) を明記
+
 ## [0.2.0] - 2026-08-06
 
 公開リポジトリのセキュリティ設定を点検・適用する新 Skill `repo-publish-security` を追加（Skill は 23 個に）。`handoff` はセッションを閉じて開き直した場合も自動復元されるようになり、Skill の品質は CI の機械検査と skill-lint のコマンド実行検証で二重に守られるようになった。
@@ -81,5 +92,6 @@
 - 各 Skill に、満たせない項目があれば理由を報告させる完了条件チェックリストを追加 (#40)
 - 各 Skill に出力フォーマットの明示と良い例 / 悪い例を追加 (#42)
 
+[0.3.0]: https://github.com/turntuptechnologies-ai/skills/releases/tag/v0.3.0
 [0.2.0]: https://github.com/turntuptechnologies-ai/skills/releases/tag/v0.2.0
 [0.1.0]: https://github.com/turntuptechnologies-ai/skills/releases/tag/v0.1.0
