@@ -3,7 +3,7 @@
 
 CI（.github/workflows/ci.yml）とローカル（`python3 scripts/lint-skills.py`）で実行する。
 判断が要る項目（description のトリガー品質・完了条件の実質的な検証可能性・固有情報・
-コマンドの実行検証）は skill-lint Skill（モデルによる点検）の担当で、本スクリプトは扱わない。
+コマンドの実行検証（#10））は skill-lint Skill（モデルによる点検）の担当で、本スクリプトは扱わない。
 
 検査項目（skill-lint チェックリストの対応番号）:
   - frontmatter の name がディレクトリ名と一致する（#1）
@@ -37,6 +37,15 @@ def err(path: object, message: str) -> None:
     errors.append(f"{path}: {message}")
 
 
+def strip_code_fences(text: str) -> str:
+    """フェンス付きコードブロックを除去する。
+
+    テンプレ例のフェンス内に `## 手順` 等の見出しを含む Skill（create-issue / create-pr /
+    handoff 等）があるため、節の検出はフェンスを除いた本文に対して行う。
+    """
+    return re.sub(r"(?ms)^[ \t]*```.*?^[ \t]*```[ \t]*$\n?", "", text)
+
+
 def parse_frontmatter(text: str) -> dict[str, str] | None:
     m = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)
     if not m:
@@ -67,18 +76,21 @@ def check_skill(skill_dir: Path) -> None:
     fm = parse_frontmatter(text)
     if fm is None:
         err(rel, "frontmatter（--- ... ---）が無い")
-        return
-    if fm.get("name") != skill_dir.name:
-        err(rel, f"frontmatter の name「{fm.get('name')}」がディレクトリ名「{skill_dir.name}」と一致しない")
-    if not fm.get("description"):
-        err(rel, "frontmatter の description が空")
+    else:
+        if fm.get("name") != skill_dir.name:
+            err(rel, f"frontmatter の name「{fm.get('name')}」がディレクトリ名「{skill_dir.name}」と一致しない")
+        if not fm.get("description"):
+            err(rel, "frontmatter の description が空")
+
+    # 節の検出はフェンス内の見出し（テンプレ例）を誤認しないよう、フェンス除去後の本文で行う
+    body = strip_code_fences(text)
 
     # 節名は前方一致（例: 「## 手順（保存）」も「## 手順」の節として扱う）
     for heading in REQUIRED_SECTIONS:
-        if not re.search(rf"^{re.escape(heading)}", text, re.MULTILINE):
+        if not re.search(rf"^{re.escape(heading)}", body, re.MULTILINE):
             err(rel, f"必須節が無い: {heading}")
 
-    done = section_body(text, "## 完了条件")
+    done = section_body(body, "## 完了条件")
     if done is not None:
         if PREAMBLE not in done:
             err(rel, f"完了条件の前文（「{PREAMBLE}」）が無い")
