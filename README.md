@@ -49,7 +49,7 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 | 分類 | Skill | 用途 |
 |---|---|---|
 | 進行 | `run-agent-team` | Issue を Agent Teams で進める（architect→reviewer→developer→tester→documenter）。TeamCreate 不可時は Subagents で代替 |
-| 進行 | `handoff` | セッションの作業状態を引き継ぎ書に保存・復元（`/clear`・`/compact` 後は同梱 hook が自動注入） |
+| 進行 | `handoff` | セッションの作業状態を引き継ぎ書に保存・復元（新しいセッション開始・`/clear`・`/compact` 後は同梱 hook が自動注入） |
 | 進行 | `create-issue` | 背景/提案/受け入れ条件の定型で Issue を起票（Issue → PR フローの入口） |
 | 進行 | `debug-root-cause` | 再現→切り分け→根本原因→回帰テストの順でバグを修正（対症療法で終わらせない） |
 | 立ち上げ | `new-project-init` | 共通規約で新規プロジェクト立ち上げ（CLAUDE.md / Rules / main 保護フック） |
@@ -116,7 +116,7 @@ Skill は Claude Code を操縦する手段の一つで、「**呼び出して�
 
 | Hook | 発動 | やること |
 |---|---|---|
-| `load-handoff.sh` | SessionStart（`clear` / `compact` 後） | プロジェクトに `.claude/handoff/latest.md` があればコンテキストに自動注入（無ければ何もしない） |
+| `load-handoff.sh` | SessionStart（`startup` / `clear` / `compact`。`resume` は対象外） | プロジェクトに `.claude/handoff/latest.md` があればコンテキストに自動注入（無ければ何もしない） |
 | `compact-preserve.sh` | PreCompact | 要約に残すべき項目（ゴール・進捗・重要ファイル・決定事項・次の一手）のガイダンスを注入 |
 
 > 表の `.claude/skills/` は standalone 配置の一般的な場所。**このリポジトリ自体は `turntup` プラグインとして配布**し、各 Skill は `skills/` 配下に置く。利用側は install 後 `/turntup:<skill>` で呼び出す（→ [インストール](#インストール)）。

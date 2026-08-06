@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SessionStart(clear|compact) で、プロジェクトの引き継ぎ書があればコンテキストに注入する。
+# SessionStart(startup|clear|compact) で、プロジェクトの引き継ぎ書があればコンテキストに注入する。
 # 無ければ何も出力せず静かに終わる（handoff Skill を使っていないプロジェクトに影響しない）。
 set -euo pipefail
 
