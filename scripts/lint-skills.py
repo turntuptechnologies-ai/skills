@@ -42,6 +42,7 @@ def strip_code_fences(text: str) -> str:
 
     テンプレ例のフェンス内に `## 手順` 等の見出しを含む Skill（create-issue / create-pr /
     handoff 等）があるため、節の検出はフェンスを除いた本文に対して行う。
+    前提: 3 連バッククォート + LF 改行のフェンスのみ対応（`~~~`・4 連・CRLF は対象外）。
     """
     return re.sub(r"(?ms)^[ \t]*```.*?^[ \t]*```[ \t]*$\n?", "", text)
 
