@@ -95,6 +95,7 @@ scripts/          Skill 構造の機械検査（lint-skills.py。CI と手元で
 - **1 Skill = 1 ディレクトリ**、`SKILL.md` 必須。
 - **`description` が命** — 「いつ使うか・何をするか」を具体的に書く。これで発動可否が決まる。
 - main 直 push 禁止。Issue → ブランチ → PR → merge。
+- **マージ = 配布ではない** — プラグインの配布は `plugin.json` の version 単位。Skill の変更は `release`（version bump・タグ・GitHub Release）を経て、利用側の `/plugin marketplace update` で初めて届く。
 
 ## Skill と他の操縦手段
 
