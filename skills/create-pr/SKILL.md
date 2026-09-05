@@ -9,26 +9,9 @@ description: 変更をプルリクエスト(PR)として作成・提出すると
 
 ## 手順
 
-1. **ブランチを確認・用意する**
-   - 現在のブランチを確認: `git branch --show-current`
-   - デフォルトブランチ（`main`/`master`）にいる場合は、作業用ブランチを切る:
-     `git switch -c <type>/<short-desc>`（例: `feat/login-form`, `fix/null-crash`）
-   - 既に作業ブランチにいればそのまま使う。
-
-2. **変更をコミットする**
-   - 関連する変更だけをステージ: `git add <paths>`（不要なら `git add -A`）
-   - コミットメッセージは **Conventional Commits** 形式:
-     `<type>: <要約>`（`feat`/`fix`/`docs`/`refactor`/`test`/`chore` など）
-   - 要約は命令形・簡潔に。本文の言語はリポジトリ/Issue の慣習に合わせる。
-
-3. **push する**
-   - `git push -u origin <branch>`
-
-4. **PR を作成する**
-   - `gh pr create --title "<conventional title>" --body "<下記テンプレ>"`
-   - タイトルも Conventional Commits 形式（例: `feat: ログインフォームを追加`）。
-   - 対応する Issue があれば本文に `Closes #<N>` を入れる（merge 時に自動クローズ）。
-   - 作成後、返ってきた PR の URL を報告する。
+1. **作業ブランチにいることを確かめる。** デフォルトブランチ（`main`/`master`）にいるなら `<type>/<short-desc>`（例: `feat/login-form`, `fix/null-crash`）でブランチを切る。既に作業ブランチならそのまま使う。
+2. **関連する変更だけをコミットする。** メッセージは **Conventional Commits** 形式 `<type>: <要約>`（`feat`/`fix`/`docs`/`refactor`/`test`/`chore` など）。要約は命令形・簡潔に、言語はリポジトリ/Issue の慣習に合わせる。
+3. **push して `gh pr create` で PR を作る。** タイトルも Conventional Commits 形式（例: `feat: ログインフォームを追加`）、本文は下記テンプレ。対応する Issue があれば `Closes #<N>` を入れる（merge 時に自動クローズ）。作成後、PR の URL を報告する。
 
 ## PR 本文テンプレート
 
