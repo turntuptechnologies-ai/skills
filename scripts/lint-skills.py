@@ -3,7 +3,7 @@
 
 CI（.github/workflows/ci.yml）とローカル（`python3 scripts/lint-skills.py`）で実行する。
 判断が要る項目（description のトリガー品質・完了条件の実質的な検証可能性・固有情報・
-コマンドの実行検証（#10））は skill-lint Skill（モデルによる点検）の担当で、本スクリプトは扱わない。
+コマンドの実行検証（#10）・過剰指示（#11））は skill-lint Skill（モデルによる点検）の担当で、本スクリプトは扱わない。
 
 検査項目（skill-lint チェックリストの対応番号）:
   - frontmatter の name がディレクトリ名と一致する（#1）
