@@ -2,6 +2,20 @@
 
 このリポジトリの主な変更を記録する。形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョンは [Semantic Versioning](https://semver.org/lang/ja/) に従う。
 
+## [0.5.0] - 2026-09-23
+
+Opus 5.5 のプロンプト指針に照らして全 Skill を点検し、サブエージェントの報告の裏取りと、思考促し・推論書き出し要求の排除を組み込んだ。Fable 5.1 / Opus 5 / Sonnet 5 でも中立〜プラスになる変更に限定している。
+
+### Added
+
+- `skill-lint` 項目 11 に「思考を促す定型句（「よく考えて」等）や推論過程の書き出し要求が無い」を追加。判断の理由・根拠・棄却理由の記録は対象外 (#93)
+- `templates/SKILL.md` の執筆コツに、思考促し・推論書き出し要求を書かないことと、ユーザー確認で止まるのは本人にしか決められない判断と破壊的・外部公開操作の前に限ることを追記。README 運用ルールにも同趣旨を追記 (#93)
+
+### Changed
+
+- `run-agent-team` — ロールの完了報告をテスト出力・checks・差分で裏取りしてから次ロールへ進める (#93)
+- `adversarial-verify` — 検証者の判定は根拠（引用行・反例箇所）の実在を確かめてから採用し、無ければ検証者に差し戻す (#93)
+
 ## [0.4.0] - 2026-09-05
 
 全 Skill を Claude 5 世代（Fable 5.1 / Opus 5 / Sonnet 5）のプロンプト指針に照らして点検し、過剰指示・移行相対表現を修正した。今後の Skill も同じ基準で書けるよう、skill-lint・テンプレ・運用ルールに「目標と制約を書き、手順書にしない」を組み込んだ。
@@ -107,6 +121,8 @@
 - 各 Skill に、満たせない項目があれば理由を報告させる完了条件チェックリストを追加 (#40)
 - 各 Skill に出力フォーマットの明示と良い例 / 悪い例を追加 (#42)
 
+[0.5.0]: https://github.com/turntuptechnologies-ai/skills/releases/tag/v0.5.0
+[0.4.0]: https://github.com/turntuptechnologies-ai/skills/releases/tag/v0.4.0
 [0.3.0]: https://github.com/turntuptechnologies-ai/skills/releases/tag/v0.3.0
 [0.2.0]: https://github.com/turntuptechnologies-ai/skills/releases/tag/v0.2.0
 [0.1.0]: https://github.com/turntuptechnologies-ai/skills/releases/tag/v0.1.0
