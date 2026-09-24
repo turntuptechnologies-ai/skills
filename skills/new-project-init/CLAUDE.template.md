@@ -64,4 +64,4 @@ permissive ライセンス（MIT / Apache-2.0 / BSD / ISC 等）のみを使い�
 
 - Issue・PR・コミット等の自然言語はすべて {{ 言語 }} で記述する。
 
-<!-- Agent Teams を使う場合は、claude-md-templates の agent-teams セクションをここに追記する。 -->
+<!-- Agent Teams で進める場合は、ロール編成と進め方（`run-agent-team` Skill）をここに追記する。 -->
