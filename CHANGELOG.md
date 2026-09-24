@@ -2,6 +2,19 @@
 
 このリポジトリの主な変更を記録する。形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョンは [Semantic Versioning](https://semver.org/lang/ja/) に従う。
 
+## [0.5.1] - 2026-09-24
+
+prompt-audit（Opus 5.5 基準）で見つかった Skill 文言の不整合を直した。
+
+### Changed
+
+- `handoff` — 復元時、Git 状態に食い違いが無ければ再開可否を聞き直さずに「次の一手」から再開する。長さの目安を SessionStart hook の 16KB 注入上限として明記 (#96)
+
+### Fixed
+
+- `new-project-init` — CLAUDE テンプレートの実在しない参照（`claude-md-templates`）を `run-agent-team` Skill に差し替え (#96)
+- `market-research` / `scaffold-cf-worker` / `run-agent-team` — 理由なしの「必ず」・移行相対表現（「従来どおり」）・誤字を修正 (#96)
+
 ## [0.5.0] - 2026-09-23
 
 Opus 5.5 のプロンプト指針に照らして全 Skill を点検し、サブエージェントの報告の裏取りと、思考促し・推論書き出し要求の排除を組み込んだ。Fable 5.1 / Opus 5 / Sonnet 5 でも中立〜プラスになる変更に限定している。
