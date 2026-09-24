@@ -74,7 +74,6 @@ Cloudflare Workers 上のアプリ/API を雛形生成する。
 - **秘密情報は `vars` に書かない。** `wrangler secret put` か Secrets Store を使う（→ no-secrets ルール）。`database_id` 等の置換が要る箇所はプレースホルダにし、実値はコミットしない。
 - テストは `@cloudflare/vitest-pool-workers` で Workers ランタイム上の挙動を検証する。
 - バインディングを足したら `pnpm types` を再実行して型を更新する。
-- 詳細な設計判断・落とし穴は `workers-best-practices` Skill を必ず参照する。
 
 ## 完了条件
 
@@ -88,5 +87,5 @@ Cloudflare Workers 上のアプリ/API を雛形生成する。
 
 ## 補足
 
-- ライセンスは permissive 前提。social/固有情報は埋め込まない。
+- ライセンスは permissive 前提。社名・固有情報は埋め込まない。
 - 記載のバージョン・パッケージ構成は Skill 作成時点の目安。初期化時に最新安定版を確認して読み替える。
