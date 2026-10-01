@@ -10,22 +10,23 @@ description: PR や push の前、コミットの前、または「チェック�
 ## 手順
 
 1. **リポジトリのルートで実行する。** マーカーファイルで stack を判定する（複数該当時は両方）。
-2. 下表のコマンドを **format(check) → lint → typecheck → test** の順で実行する。
-3. **設定ファイルに定義済みのコマンド（package.json の scripts 等）を最優先する。** 下表は無い場合のフォールバック。
-4. check ごとに pass / fail を報告する。fail があれば該当出力を示す。ツールが未設定なら**スキップした旨を明記**する（勝手に導入しない）。
+2. **宣言済みの依存が未インストールなら、先にインストールする。** lockfile に従うプロジェクト自身のパッケージマネージャで入れる（`<pm> install` / `uv sync` 等）。プロジェクトが宣言済みの依存を入れるだけなので、ツールの新規導入には当たらない。ユーザーがインストールを止めている場合は実行せず、その旨を報告する。
+3. 下表のコマンドを **format(check) → lint → typecheck → test** の順で実行する。
+4. **設定ファイルに定義済みのコマンド（package.json の scripts 等）を最優先する。** 下表は無い場合のフォールバック。ただし中身が書き込み型（`--write` / `--fix` 等）の script はチェックに使わず、非破壊の同等コマンドで実行する（`format:check` 等の非破壊 script があればそれ、無ければ `biome format .` / `biome check .` のように書き込みフラグを外したもの）。チェック工程でファイルを書き換えると、検証対象の差分が変わってしまうため。
+5. check ごとに pass / fail を報告する。fail があれば該当出力を示す。ツールがプロジェクトに未設定なら**スキップした旨を明記**する（勝手に導入しない）。設定されているのに起動できなかったチェック（コマンド未検出・依存不足・環境エラー）はスキップではなく **fail** とし、原因を備考に書く。
 
 ## stack 別コマンド
 
 | マーカー | stack | format | lint | typecheck | test |
 |---|---|---|---|---|---|
 | `pyproject.toml` (+`uv.lock`) | Python (uv) | `uv run ruff format --check .` | `uv run ruff check .` | `uv run mypy src/` | `uv run pytest` |
-| `package.json` | Node/TS | `<pm> run format` or `biome format .` | `<pm> run lint` | `<pm> run typecheck` / `tsc --noEmit` | `<pm> test` |
+| `package.json` | Node/TS | `<pm> run format:check` or `biome format .` | `<pm> run lint` | `<pm> run typecheck` / `tsc --noEmit` | `<pm> test` |
 | `deno.json(c)` | Deno | `deno fmt --check` | `deno lint` | `deno check .` | `deno test` |
 | `Cargo.toml` | Rust | `cargo fmt --check` | `cargo clippy -- -D warnings` | （clippy に含む） | `cargo test` |
 
 ### パッケージマネージャ判定（Node/TS）
 - `pnpm-lock.yaml` → `pnpm` / `package-lock.json` → `npm` / `yarn.lock` → `yarn` / `bun.lockb` → `bun`
-- まず `package.json` の `scripts` を見て、定義されている script 名（`lint` / `typecheck` / `check` / `test` / `format`）を使う。
+- まず `package.json` の `scripts` を見て、定義されている script 名（`lint` / `typecheck` / `check` / `test` / `format`）を使う。書き込み型の script は手順 4 のとおり非破壊の同等コマンドに置き換える。
 - `biome.json` があれば lint/format は `biome` に寄せる。
 
 ## 結果の報告フォーマット
@@ -59,7 +60,9 @@ fail がある場合は表の下に該当エラー出力を貼る。全て pass 
 - [ ] 各チェック（format/lint/typecheck/test）を **実行 / 失敗 / スキップ** のいずれかで漏れなく報告した（スキップには理由を付す）
 - [ ] fail があれば該当する出力（エラーメッセージ）を提示した
 - [ ] 設定ファイル（scripts / CI）に定義済みコマンドがあるか確認してから、フォールバック表を使った
-- [ ] 勝手にツールを導入・設定変更していない
+- [ ] チェック工程でファイルを書き換えていない（書き込み型の script を非破壊の同等コマンドに置き換えた）
+- [ ] 起動できなかったチェックをスキップではなく fail とし、原因を報告した
+- [ ] ツールの新規導入・設定変更をしていない（宣言済み依存のインストールは除く）
 
 ## 補足
 
