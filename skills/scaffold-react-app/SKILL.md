@@ -81,7 +81,7 @@ Vite ベースの React 19 + TypeScript SPA を雛形生成する。
 - [ ] scripts（dev/build/preview/test/test:run/lint/format/check）が揃っている
 - [ ] Tailwind / Vitest(jsdom + setup) / Biome が設定済み
 - [ ] API 連携がある場合 TanStack Query を使っている
-- [ ] `VITE_*` 以外の秘密情報をフロントに埋め込んでいない
+- [ ] 秘密情報（`VITE_*` を含む）をフロントに埋め込んでいない
 
 ## 補足
 
