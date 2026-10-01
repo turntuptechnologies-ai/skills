@@ -2,6 +2,19 @@
 
 このリポジトリの主な変更を記録する。形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョンは [Semantic Versioning](https://semver.org/lang/ja/) に従う。
 
+## [0.5.2] - 2026-10-01
+
+prompt-audit と Sonnet 5.5 向けの点検で見つかった、品質ゲートと scaffold の不整合を直した。
+
+### Changed
+
+- `pre-pr-checks` — 宣言済み依存が未インストールなら、プロジェクトのパッケージマネージャで先に入れてから実行する。設定済みなのに起動できなかったチェックはスキップではなく fail として原因を報告する (#99)
+
+### Fixed
+
+- `pre-pr-checks` — 書き込み型の script（`--write` / `--fix`）をチェックに使っていたため、scaffold で作ったプロジェクトでチェック工程がファイルを書き換えていた。非破壊の同等コマンドで実行する (#99)
+- `scaffold-react-app` — 完了条件が `VITE_*` なら秘密情報を埋め込んでよいと読めたのを、「`VITE_*` を含む秘密情報を埋め込まない」に修正 (#99)
+
 ## [0.5.1] - 2026-09-24
 
 prompt-audit（Opus 5.5 基準）で見つかった Skill 文言の不整合を直した。
