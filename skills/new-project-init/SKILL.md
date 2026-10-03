@@ -27,8 +27,9 @@ description: 新しいプロジェクト/リポジトリを共通規約で立ち
    - Rules は「**常に守る制約**」。CLAUDE.md（概要・手順）とは役割が別。詳細な制約は Rules を正とし、CLAUDE.template 側では重複させない。
    - 特定パスにだけ効かせたい制約は、frontmatter に `paths:` を足してスコープする（トークン節約）。
 
-5. **main 保護フックを撒く** — 同梱の [`hooks/block-main-push.sh`](hooks/) を `.claude/hooks/` に置き（`chmod +x`）、[`hooks/settings.snippet.json`](hooks/) を `.claude/settings.json` の `hooks.PreToolUse` にマージする。
+5. **main 保護フックを撒く** — 同梱の [`hooks/settings.snippet.json`](hooks/settings.snippet.json) を `.claude/settings.json` の `hooks.PreToolUse` にマージする。
    - 「main 直 push 禁止」のような**ハードガードは指示文ではなくフックで担保**する（モデルの判断に委ねない）。
+   - 判定はコマンドに直接書いてあり、外部スクリプトは置かない。`$CLAUDE_PROJECT_DIR/...` で外部スクリプトを呼ぶと、親ディレクトリで起動してから移動したセッションでは見つからず、ガードが黙って外れる。今いるリポジトリから解決すると、移動先の他リポジトリのスクリプトを実行してしまう。
    - 最終的な保証は GitHub のブランチ保護。フックは早期に止める二重防御。
 
 6. **Git/GitHub をセットアップする**
@@ -62,7 +63,7 @@ description: 新しいプロジェクト/リポジトリを共通規約で立ち
 
 - [ ] CLAUDE.md にプレースホルダ（`{{ }}`）が残っていない
 - [ ] `.claude/rules/` に 4 ルール（commit-conventions/license-policy/no-secrets/branching）を配置した
-- [ ] `block-main-push.sh` を `.claude/hooks/` に配置し **chmod +x** し、settings.json に PreToolUse を配線した
+- [ ] `hooks/settings.snippet.json` の PreToolUse フックを `.claude/settings.json` にマージした
 - [ ] `git init` + 初期コミット済み、デフォルトブランチが `main`
 - [ ] `.env.example` に実値が入っていない / LICENSE 方針を確認した
 - [ ] public で公開する場合、`repo-publish-security` での点検・適用を実施または案内した（公開しない場合はスキップでよい）
