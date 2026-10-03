@@ -1,5 +1,5 @@
 {
-  "//": "対象プロジェクトの .claude/settings.json にこの hooks ブロックをマージする。block-main-push.sh は .claude/hooks/ に配置し、実行権限を付ける (chmod +x)。",
+  "//": "対象プロジェクトの .claude/settings.json にこの hooks ブロックをマージする。main/master を明示的に対象にした git push（origin main / :main / HEAD:main 等）を exit 2 でブロックする。判定はコマンドに直接書いてあり外部スクリプトを呼ばないので、セッションの起動ディレクトリ（$CLAUDE_PROJECT_DIR）に依存せず、移動先の他リポジトリのファイルも実行しない。jq が無ければ入力全体に対して判定する。限界: main に居る状態での bare な `git push` はコマンド文字列からは判定できない。最終的な保証は GitHub のブランチ保護で行う。",
   "hooks": {
     "PreToolUse": [
       {
@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/block-main-push.sh"
+            "command": "i=\"$(cat)\"; c=\"$(printf '%s' \"$i\" | jq -r '.tool_input.command // empty' 2>/dev/null || printf '%s' \"$i\")\"; printf '%s' \"$c\" | grep -qiE 'git[[:space:]]+push' || exit 0; if printf '%s' \"$c\" | grep -qiE '(origin[[:space:]]+(main|master)\\b|:(refs/heads/)?(main|master)\\b|\\bHEAD:(main|master)\\b)'; then echo '🚫 main/master への直接 push は禁止です。ブランチを切って PR を作成してください（create-pr Skill / branching ルール）。' >&2; exit 2; fi; exit 0"
           }
         ]
       }
