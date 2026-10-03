@@ -2,6 +2,18 @@
 
 このリポジトリの主な変更を記録する。形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョンは [Semantic Versioning](https://semver.org/lang/ja/) に従う。
 
+## [0.5.3] - 2026-10-03
+
+`new-project-init` が撒く main 直 push ガードが、セッションの起動ディレクトリによって外れていたのを直した。
+
+### Changed
+
+- `new-project-init` — main 直 push ガードの判定を `hooks/settings.snippet.json` のコマンドに直接書く形にし、`hooks/block-main-push.sh` を廃止した。手順と完了条件は「スクリプトを `.claude/hooks/` に置く」から「snippet を `.claude/settings.json` にマージする」に変わる。コピー済みのプロジェクトはそのまま動く (#102)
+
+### Fixed
+
+- `new-project-init` — フックを `$CLAUDE_PROJECT_DIR/.claude/hooks/block-main-push.sh` で呼んでいたため、親ディレクトリで起動してから対象リポジトリに移動したセッションでは Bash のたびに `not found` が出て、ガードが効いていなかった。外部ファイルに依存しないので起動ディレクトリに関係なく動き、移動先の他リポジトリのファイルも実行しない (#102)
+
 ## [0.5.2] - 2026-10-01
 
 prompt-audit と Sonnet 5.5 向けの点検で見つかった、品質ゲートと scaffold の不整合を直した。
