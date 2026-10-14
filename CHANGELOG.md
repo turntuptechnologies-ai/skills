@@ -2,6 +2,14 @@
 
 このリポジトリの主な変更を記録する。形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョンは [Semantic Versioning](https://semver.org/lang/ja/) に従う。
 
+## [0.6.0] - 2026-10-14
+
+リポジトリの解説動画を作る Skill を追加した。
+
+### Added
+
+- `repo-explainer-video` — リポジトリの種類（UI アプリ / 研究論文 / ライブラリ・CLI）を判定し、目的・対象者・長さをヒアリング → 絵コンテ承認 → プレビュー確認の順に相談しながら、UI 操作の録画やスライドで MP4 と字幕ファイル（SRT / VTT）を作る。ナレーションの既定は字幕のみで、音声は環境で使える TTS を検出して選ぶ。Playwright での撮影には OS の共有ライブラリ（`npx playwright install-deps`）か公式 Docker イメージが要る (#105)
+
 ## [0.5.3] - 2026-10-03
 
 `new-project-init` が撒く main 直 push ガードが、セッションの起動ディレクトリによって外れていたのを直した。
