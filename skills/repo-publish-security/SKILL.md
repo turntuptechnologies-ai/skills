@@ -93,6 +93,7 @@ CI を required status check にする場合（#9）の追加 rule（`context` �
 
 - **点検結果の提示 → ユーザー了承 → 適用**の順を守る。特に ruleset は既存の運用（デフォルトブランチへの直 push 等）を止めるので、黙って適用しない。
 - JSON B の `required_approving_review_count` は運用に合わせて確認する: 1 人運用・AI エージェントがセルフマージする運用なら 0、複数人レビュー運用なら 1 以上。
+  - 複数人レビュー運用なら、あわせて `dismiss_stale_reviews_on_push: true`（承認後に積まれたコミットで承認を取り消す）と、`.github/workflows/` やリリース設定を CODEOWNERS に入れて `require_code_owner_review: true` にすることも提案する。理由: 承認した時点のコードと実際にマージされるコードがずれるのを防ぎ、CI やリリースの設定変更には担当者が目を通すようにするため。
 - 既に classic branch protection（`gh api repos/{owner}/{repo}/branches/<default branch>/protection`）で同等の保護がある場合、ruleset を重ねて作らない。
 - private のままだと有効化できない項目がある（secret scanning 等は private では GitHub Advanced Security 契約が必要）。private → public 切替では「切替 → 直後に適用」の順で進める。
 - fork や archive 済みリポジトリでは変更できない設定がある。エラーになった項目は対象外として理由を報告する。

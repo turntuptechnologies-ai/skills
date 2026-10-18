@@ -47,7 +47,7 @@
 2. **ブランチ作成** — `issue-<番号>/<簡単な説明>`（例: `issue-42/add-user-auth`）。
 3. **実装** — 作業中は適宜 commit・push。**main への直接 push は禁止**（`.claude/rules/branching.md` ＋ `.claude/settings.json` の PreToolUse フックで担保）。
 4. **PR 作成** — Issue を参照（`Closes #42`）。
-5. **コードレビュー** — マージ前にレビュー（セキュリティ観点を含む）。
+5. **コードレビュー** — マージ前にレビュー（セキュリティ観点を含む）。指摘には「修正」か「見送り（理由つき）」で答える。同じ指摘が繰り返し出たら、その規約をこのファイル・`.claude/rules/`・lint ルールに移す。
 6. **squash merge → ブランチ削除**。
 
 ## ライセンスルール
