@@ -2,6 +2,15 @@
 
 このリポジトリの主な変更を記録する。形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に従い、バージョンは [Semantic Versioning](https://semver.org/lang/ja/) に従う。
 
+## [0.9.0] - 2026-11-26
+
+GitHub Issue Artifact（公開プレビュー）を使い、設計と根本原因分析を Issue に版の履歴つきで残すようにした。gh が対応していない環境では Issue コメントに残す。
+
+### Changed
+
+- `run-agent-team` — architect の設計を Issue の Artifact（type `plan`）として作り、設計レビュー後の改訂は同じ Artifact を更新する。個々の判断・調査結果は Issue コメントでよい (#114)
+- `debug-root-cause` — 対応する Issue があれば、報告内容を根本原因分析の Artifact として残し、その URL を報告する (#114)
+
 ## [0.8.0] - 2026-11-10
 
 Claude Fable 5.2 のプロンプト指針に照らして全 Skill を点検し、確認ルールの書き方・途中停止の防止・単体で読める報告を取り込んだ。Opus 5.5 / Sonnet 5.5 でも中立〜プラスになる変更に限っている。
