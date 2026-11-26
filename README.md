@@ -62,6 +62,7 @@ install 後は `/turntup:<skill>` で呼び出す（Claude が `description` を
 | 品質ゲート | `pre-pr-checks` | stack 判定で format/lint/typecheck/test を一括実行 |
 | 品質ゲート | `doc-sync` | ドキュメントの実装乖離を点検・修正 |
 | 品質ゲート | `skill-lint` | SKILL.md をチェックリストで点検し、指摘は反証（敵対的検証）を経て確定（Skill 追加 PR の前に） |
+| 品質ゲート | `formal-verify` | 約束を性質として書き、モデル検査（範囲内の全実行順）かプロパティベーステスト（大量の生成入力）で検証（わざと壊した版での検出確認つき） |
 | 品質ゲート | `adversarial-verify` | レビュー指摘の候補に反証を試み、生き残った指摘だけを確定（`skill-lint` / reviewer の検証フェーズ） |
 | 提出 | `create-pr` | Conventional Commits タイトルで PR 作成 |
 | 提出 | `pr-babysit` | PR の CI を監視し、失敗を修正して green になるまで面倒を見る |
